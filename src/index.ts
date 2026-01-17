@@ -1,0 +1,21 @@
+import express from "express";
+import { config } from "dotenv";
+import connectDb from "./server/connectDb.ts";
+import reportRoute from "./routes/reportRoute.ts";
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+config();
+
+app.use(express.json());
+app.use("/api/v1/reports", reportRoute);
+
+app.listen(PORT, async () => {
+  try {
+    await connectDb(process.env.MONGO_DB_URI as string);
+    console.log(`Server is running on port ${PORT}`);
+  } catch (error) {
+    console.error("Failed to connect to the database", error);
+  }
+});
