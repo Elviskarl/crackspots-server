@@ -3,6 +3,6 @@ import { getAllReports } from "../controllers/reports.ts";
 
 const route = Router();
 
-route.get("/", getAllReports);
+route.get("/reports", getAllReports);
 
 export default route;

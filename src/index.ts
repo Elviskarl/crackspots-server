@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 config();
 
 app.use(express.json());
-app.use("/api/v1/reports", reportRoute);
+app.use("/api/v1", reportRoute);
 
 app.listen(PORT, async () => {
   try {
