@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 config();
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/api/v1", reportRoute);
 
