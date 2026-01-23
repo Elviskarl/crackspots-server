@@ -1,4 +1,4 @@
-export interface coordinates {
+export interface Coordinates {
   DateTimeOriginal: string;
   GPSLatitude: number;
   GPSLongitude: number;
@@ -6,6 +6,6 @@ export interface coordinates {
   GPSLongitudeRef: string;
 }
 export interface Report {
-  coordinates: coordinates;
+  coordinates: string;
   severity: "high" | "medium" | "low";
 }
