@@ -4,6 +4,7 @@ import { connectImageBucket } from "../server/connectImageBucket.ts";
 import { wrapBuffer } from "../middleware/wrapBuffer.ts";
 import type { Report } from "../types/index.ts";
 import { handleExifData } from "../utils/handleExifData.ts";
+import { reverseGeocode } from "../utils/reverseGeocode.ts";
 
 export async function getAllReports(req: Request, res: Response) {
   try {
@@ -38,10 +39,27 @@ export async function createReport(
 
     // Save report to database
     const { lat, long, dateTaken } = handleExifData(req.body.coordinates);
+
+    // Extract reverse geocode data
+    const reverseGeocodeResult = await reverseGeocode(lat, long);
+    const { category, address } = reverseGeocodeResult;
+    if (!category || !address) {
+      return res
+        .status(422)
+        .json({ error: "Unable to determine location category or address" });
+    }
+
     await reportModel.create({
       location: {
         type: "Point",
         coordinates: [long, lat],
+        category,
+        address: {
+          road: address.road || "",
+          neighbourhood: address.neighbourhood || "",
+          city: address.city || "",
+          state: address.state || "",
+        },
       },
       severity: req.body.severity,
       cloudinary_url: uploadResult.secure_url,
