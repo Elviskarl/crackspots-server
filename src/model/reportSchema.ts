@@ -16,6 +16,16 @@ const reportSchema = new Schema(
         type: [Number],
         required: true,
       },
+      address: {
+        road: String,
+        neighbourhood: String,
+        city: String,
+        state: String,
+      },
+      category: {
+        type: String,
+        required: true,
+      },
     },
     severity: {
       type: String,
