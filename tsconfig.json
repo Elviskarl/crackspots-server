@@ -20,9 +20,10 @@
     "declaration": true,
     "declarationMap": true,
 
-    // Stricter Typechecking Options
+    // Stricter Typechecking Optaions
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
+    "rewriteRelativeImportExtensions": true,
 
     // Style Options
     "noImplicitReturns": true,
@@ -38,9 +39,7 @@
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
-    "allowImportingTsExtensions": true,
     "moduleDetection": "force",
-    "skipLibCheck": true,
-    "noEmit": true
+    "skipLibCheck": true
   }
 }
